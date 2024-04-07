@@ -1,4 +1,7 @@
-git stash >> /dev/null
+stash_ref=$(git rev-parse --verify refs/stash)
+git stash
+new_stash_ref=$(git rev-parse --verify refs/stash)
+
 
 if grep -qx $1 gomamayo.txt; then
     echo "found"
@@ -19,4 +22,9 @@ else
     echo "No changes"
 fi
 
-git stash apply >> /dev/null
+if [ "$stash_ref" != "$new_stash_ref" ]; then
+    echo "Stash が行われました"
+    git stash apply >> /dev/null
+else
+    echo "Stash は行われていません"
+fi
