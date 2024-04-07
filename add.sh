@@ -23,8 +23,8 @@ else
 fi
 
 if [ "$stash_ref" != "$new_stash_ref" ]; then
-    echo "Stash が行われました"
+    echo "a stash was performed"
     git stash apply >> /dev/null
 else
-    echo "Stash は行われていません"
+    echo "no stash was performed"
 fi
